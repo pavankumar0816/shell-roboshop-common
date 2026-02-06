@@ -10,6 +10,7 @@ N="\e[0m"
 SCRIPT_DIR=$PWD
 START_TIME=$(date +%s)
 MONGODB_HOST=mongodb.pmpkdev.online
+MYSQL_HOST=mysql.pmpkdev.online
 
 mkdir -p $LOGS_FOLDER
 
@@ -32,6 +33,7 @@ VALIDATE(){
 }
 
 
+
 nodejs_setup(){
     dnf module disable nodejs -y &>>$LOGS_FILE
     VALIDATE $? "Disabling Nodejs Default Version"
@@ -44,6 +46,19 @@ nodejs_setup(){
 
     npm install &>>$LOGS_FILE
     VALIDATE $? "Installing Nodejs Dependencies"
+}
+
+java_setup(){
+    dnf install maven -y &>>$LOGS_FILE
+    VALIDATE $? "Installing Maven"
+
+    cd /app 
+    mvn clean package  &>>$LOGS_FILE
+    VALIDATE $? "Installing and Building $app_name"
+
+    mv target/$app_name-1.0.jar $app_name.jar 
+    VALIDATE $? "Moving and Renaming  $app_name"
+
 }
 
 app_setup(){
