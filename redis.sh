@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ./common.sh
+check_root
 
 if command -v redis-server &>/dev/null && redis-server -v | grep -q "v=7"; then
     echo -e "Already Installed ... $Y Skipping $N" | tee -a $LOGS_FILE
