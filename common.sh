@@ -31,6 +31,7 @@ VALIDATE(){
     fi
 }
 
+
 nodejs_setup(){
     dnf module disable nodejs -y &>>$LOGS_FILE
     VALIDATE $? "Disabling Nodejs Default Version"
