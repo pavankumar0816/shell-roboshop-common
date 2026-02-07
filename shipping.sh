@@ -8,7 +8,7 @@ app_setup
 java_setup
 systemd_setup
 
-dnf install mysql -y 
+dnf install mysql -y &>>$LOGS_FILE
 VALIDATE $? "Installing Mysql Client"
 
 mysql -h $MYSQL_HOST -uroot -pRoboShop@1 -e "use cities" &>> $LOGS_FILE

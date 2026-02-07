@@ -103,7 +103,6 @@ systemd_setup(){
     systemctl enable $app_name  &>>$LOGS_FILE
     systemctl start $app_name
     VALIDATE $? "Enabling And Starting $app_name Service"
-
 }
 
 app_restart(){
